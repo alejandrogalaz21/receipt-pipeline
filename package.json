@@ -1,0 +1,20 @@
+{
+  "name": "receipt-pipeline",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "infra/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "@types/aws-sdk": "^0.0.42",
+    "aws-cdk-lib": "^2.195.0",
+    "aws-sdk": "^2.1692.0",
+    "constructs": "^10.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.18",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
