@@ -3,6 +3,7 @@ import { Stack, StackProps, RemovalPolicy } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
 import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as lambdaEventSources from 'aws-cdk-lib/aws-lambda-event-sources';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 
@@ -69,6 +70,19 @@ export class ReceiptStack extends Stack {
         effect: Effect.ALLOW,
       })
     );
+
+    // Nueva lambda que procesará los datos desde SheetsQueue
+    const sheetsLambda = new NodejsFunction(this, 'SheetsLambda', {
+      entry: path.join(__dirname, '../../../apps/sheets-lambda/src/handler.ts'),
+      handler: 'handler',
+      runtime: lambda.Runtime.NODEJS_18_X,
+    });
+
+    // Dar permisos para que la lambda lea de la cola
+    sheetsQueue.grantConsumeMessages(sheetsLambda);
+
+    // Conectar la cola como fuente de eventos a la lambda
+    sheetsLambda.addEventSource(new lambdaEventSources.SqsEventSource(sheetsQueue));
 
     // Evento para disparar Lambda al subir archivos a S3 (solo en carpeta tickets/)
     bucket.addEventNotification(
