@@ -1,5 +1,6 @@
 import { S3Event, Context } from 'aws-lambda';
 import { S3, Textract } from 'aws-sdk';
+import { SNSClient, PublishCommand } from "@aws-sdk/client-sns";
 
 const s3 = new S3();
 const textract = new Textract();
