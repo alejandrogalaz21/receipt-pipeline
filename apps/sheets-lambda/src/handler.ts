@@ -32,26 +32,34 @@ export const handler = async (event: SQSEvent, context: Context) => {
   for (const record of event.Records) {
     console.log('📦 Processing SQS record...');
 
-    let body;
+    let parsedSNSMessage;
     try {
-      body = JSON.parse(record.body);
-      console.log('📨 Message body parsed:', body);
+      const outerBody = JSON.parse(record.body);
+      parsedSNSMessage = JSON.parse(outerBody.Message);
+      console.log('📨 Parsed SNS Message:', parsedSNSMessage);
     } catch (error) {
-      console.error('❌ Failed to parse SQS message body:', error);
+      console.error('❌ Failed to parse SNS message:', error);
       continue;
     }
 
     try {
-      const fields = body.ExpenseDocuments?.[0]?.SummaryFields || [];
-      const row: any[] = fields.map((field: any) => field.ValueDetection?.Text || '');
+      const { extractedFields, bucket, key } = parsedSNSMessage;
 
-      if (row.length > 0) {
-        console.log(`📝 Appending row to Google Sheets:`, row);
-        await saveExpensesToSheet(auth, spreadsheetId, range, [row]);
-        console.log('✅ Data appended to Google Sheets.');
-      } else {
-        console.warn('⚠️ No summary fields found in message.');
+      if (!extractedFields) {
+        console.warn('⚠️ No extractedFields found in message.');
+        continue;
       }
+
+      // Create a row using values from extractedFields + metadata
+      const row = [
+        ...Object.values(extractedFields),
+        bucket || '',
+        key || ''
+      ];
+
+      console.log(`📝 Appending row to Google Sheets:`, row);
+      await saveExpensesToSheet(auth, spreadsheetId, range, [row]);
+      console.log('✅ Data appended to Google Sheets.');
     } catch (error) {
       console.error('❌ Error while saving data to Google Sheets:', error);
     }
