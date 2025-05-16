@@ -4,5 +4,8 @@
   "type": "module",
   "main": "src/handler.ts",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "googleapis": "^144.0.0",
+    "google-auth-library": "^9.15.1"
+  }
 }

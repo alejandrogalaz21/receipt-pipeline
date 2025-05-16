@@ -76,6 +76,12 @@ export class ReceiptStack extends Stack {
       entry: path.join(__dirname, '../../../apps/sheets-lambda/src/handler.ts'),
       handler: 'handler',
       runtime: lambda.Runtime.NODEJS_18_X,
+      environment: {
+        GOOGLE_SPREADSHEET_ID: "1N950b-s9nd-GS1LBS3JzXQS86TGjAYypRPwDfAsET1k",
+        GOOGLE_CLIENT_EMAIL: "google-sheets@the-art-of-coding.iam.gserviceaccount.com",
+        GOOGLE_PRIVATE_KEY: "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCRfY5gBGHumXVX\n/1VqVPHxYjjKnNhTsscLWdFK7NJMo6Fq9q279+io5YBah5k34oN6SGxIo4e8ivrC\nEveRtvJVCg2KrgVMC8V/2LfSeAJu+woFe6FAaIg+JJH3NELDCzEwYX+UOQqX/q2F\nyAYdMI8n92NBvd1Uy8rcrkcuIx3vnpJ7RT7ormorNSNz+/Lpk9hHu9kIPOsGNl9y\nupXCQolyJ5khdcDlZLXXf8cQ0IuV2J6Y49E4u3FFV2UpIeSDcxBEd1ITBE7HrqAW\n/eDuchguLDDCKScIM1R4cPk8WSwCYn4R4EOE5/Utd0hQgZGwgo797YB08wjxzRL8\nCGwjN8s9AgMBAAECggEAAXO5bcu6vCejxEImtKtj3cb0mPsUl/iXDs3cQ6KWR7sI\nrk6yIF039nrnO3Vn1KcKAmNXfKhwf0kmJF/i631MsQdrEq5WxwdFYZevX/ugJJeU\npkYxWg6hBiPAdtvlQFlBKgHdxNmGjvVKVI/mQGN+w5qZuZXURWzM7xkTL0qc7spd\nwt8uUJumOsRfinYxemKtNANYi/vMzYpccKKdynXOgpdjgLbRfpnbQ/RTEtR90eh7\ncjdgqB2aavY2lCNQl4iGla69MlR6Vv6iDN9GXuSpeGJnP+Mh93cDJpWvZ3XGxo0G\nXhC+BDmPf1kWb2uvbet0Ob4v3gfFAWLIsE4kPDqZQQKBgQDBUIAWvglazmIXtH2N\nxydQiuVSQqc99QMN4nCNdRwIjQhTMmu2YWrL8YwJkmvpXjV1AL64D/rAsvs2N6up\n6CDAV5h8feK5bdN9e7+3UsVNhFsO7c5n9R/jAS+soxHL4QG3h2kM+k04i0TRlGkZ\n8+CGPLHa9vnc3dNbUtDlOEQaQQKBgQDAqxHtHfim9ci3d/lQdT1dr+crar6xNOIM\nUnXlkYHWvyHHxNbiIue72pERKFPgMZVCkL6zyuGNnW5E6056dlrHWO4D5v5KxRL8\n90mMVcRUDgdq1wrc2NUq2QDKNbsA5SZcPm2oQJogxEeeS1QuLh2fhmViSLlDoYMI\nWYnEi/mZ/QKBgEtaX7N9vBPDYwUue8pqGO8SVTVteddyzA/7djgNsDG9F8OmYcoj\nywdYTmfkxV+gM2I6Oh1xTSMUIUwPA0EllK6k9nGAeIIjR08gj6icAQCoWP5GwDBR\nom5QJg87OVKpkIvDorVGVBd4Ygj3usg9AgYRXpqlrtvjM+HjND5FYnaBAoGBAIWc\nHKpbBnyCJddVk8eABjZaLe2l8OfizH/PD4NMDMZndX2bu4jGu/1B7SgA12m5+NBY\noGb+YrxaWIXiyGGUgg+MVELQhbhEQo66zn5LXAMOV4Z36kiM9gboxet0p2JPhvKh\nOFpdsoTWmPPlOVNtF43xHY2y8Qc9kijQLwHmMAnhAoGAVMLuG0Pr58rp2gW3J30c\nITJhBy9kJgfBhm7CpOmUx/trek1B6xmv1P+7wPTU1NkcByaqmn1vuyf5+jAtYif0\njHlRehZEDB2fkWeJ4MTK49QtXuogzj+GQMIW9sbz9jgr0ZI6Z4FbAKONid/p220x\nssVh9qJdOPvjTBtE2+zT2w0=\n-----END PRIVATE KEY-----\n",
+        GOOGLE_SPREADSHEET_RANGE: 'Tickets!A1',
+      },
     });
 
     // Dar permisos para que la lambda lea de la cola
